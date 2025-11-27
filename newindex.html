@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="content="width=device-width, initial-scale=1.0">
+    <title>Alia Sofea - UI/UX Portfolio</title>
+    <!-- Use a system font stack for clean, accessible text, which is allowed as it's not a framework --><style>
+        /* Base Reset & Variables - Softened, Girly Palette */
+        :root {
+            --primary-color: #f472b6; /* Rose-400 (Pink/Coral) */
+            --secondary-color: #8b5cf6; /* Violet-500 (Purple) */
+            --text-dark: #4c1d95; /* Deep Violet-800 */
+            --text-light: #ffffff;
+            --background-light: #faf5ff; /* Lavender-50 (Very light purple background) */
+            --background-dark: #1f1f3a; /* Darker Navy/Violet */
+            --border-radius: 12px; /* Slightly larger radius for a softer look */
+            --transition-speed: 0.3s;
+            scroll-behavior: smooth;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: background-color var(--transition-speed), transform 0.1s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(244, 114, 182, 0.3);
+        }
+
+        .btn:hover, .btn:focus {
+            background-color: #ec4899; /* Deeper Pink */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(244, 114, 182, 0.4);
+        }
+
+        /* Navigation Bar */
+        .header {
+            background-color: var(--background-dark);
+            color: var(--text-light);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+        }
+
+        .logo a {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-light);
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-menu li {
+            margin-left: 32px;
+        }
+
+        .nav-menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 0;
+            transition: color var(--transition-speed);
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-menu a:hover, .nav-menu a:focus {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        /* Hamburger Menu (Mobile) */
+        .hamburger {
+            display: none; /* Hidden on desktop */
+            cursor: pointer;
+            padding: 10px;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 24px;
+        }
+
+        /* Sections Styling */
+        section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--secondary-color);
+            font-weight: 700;
+        }
+
+        /* --- HOME SECTION (UPDATED LAYOUT) --- */
+        #home {
+            min-height: 80vh;
+            display: flex; /* Keep flex for vertical centering */
+            align-items: center;
+            /* Cloud Pattern using CSS radial and linear gradients for a soft texture */
+            background-color: #fce7f3; /* Pink-100 as fallback */
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.5) 1px, transparent 0),
+                radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.4) 1px, transparent 0),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.6) 2px, transparent 0),
+                linear-gradient(to top, #fef08a 0%, #fce7f3 100%); /* Soft Yellow to Soft Pink gradient base */
+            background-size: 20px 20px, 40px 40px, 30px 30px, 100% 100%;
+            background-repeat: repeat, repeat, repeat, no-repeat;
+        }
+
+        .home-grid { /* New class for the content container with image/text layout */
+            display: grid;
+            grid-template-columns: 1fr 1.5fr; /* Image (1) on left, Text (1.5) on right */
+            gap: 60px;
+            align-items: center;
+            text-align: left;
+            margin: 0 auto;
+            max-width: 1100px;
+        }
+
+        .hero-image-container {
+            text-align: center;
+        }
+
+        .hero-image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 50%;
+            box-shadow: 0 15px 30px rgba(139, 92, 246, 0.3); /* Stronger purple shadow */
+            animation: float 4s ease-in-out infinite; /* Subtle floating effect */
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Existing .hero-content styles adapted for the grid */
+        .hero-content {
+            text-align: left;
+            margin: 0;
+        }
+
+        .hero-content p:first-of-type {
+            font-size: 1.25rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin: 16px 0 24px 0;
+            line-height: 1.1;
+            color: var(--secondary-color);
+        }
+
+        /* --- ABOUT ME SECTION (ADJUSTED) --- */
+        #about-me .about-content { /* Container for the text now that image is gone */
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .skills-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            gap: 12px;
+            justify-content: center; /* Center skills list */
+        }
+
+        .skill-item {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 8px 16px;
+            border-radius: var(--border-radius); /* Rounded rect */
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Projects Section - Cheerful Styling Updates */
+        #projects {
+            background-color: #f3f4f6;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            text-align: left;
+        }
+
+        .project-card {
+            background-color: var(--text-light);
+            padding: 24px;
+            border-radius: 20px; /* More rounded for cuter, softer look */
+            /* Cheerful shadow effect combining pink and light purple */
+            box-shadow: 0 8px 20px rgba(244, 114, 182, 0.15), 0 0 0 2px rgba(139, 92, 246, 0.08); 
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.01); /* Bubbly lift effect */
+            /* Stronger, more attractive shadow on hover */
+            box-shadow: 
+                0 15px 30px rgba(139, 92, 246, 0.3), /* Strong purple lift */
+                0 0 0 4px var(--primary-color); /* Cute pink glowing border */
+        }
+        
+        /* Add a sparkle before the project title for cheerfulness */
+        .project-card h3::before {
+            content: "✨";
+            margin-right: 8px;
+            font-size: 1.2rem;
+            vertical-align: middle;
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+
+        .project-card p {
+            margin-bottom: 20px;
+            font-size: 1rem;
+            color: #6b7280; /* Gray-500 */
+        }
+
+        .project-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            transition: color var(--transition-speed);
+        }
+
+        .project-link:hover {
+            text-decoration: underline;
+            color: var(--secondary-color); /* Change color on hover for fun */
+        }
+
+        /* Contact Section */
+        #contact {
+            background-color: var(--background-dark);
+            color: var(--text-light);
+        }
+
+        #contact h2 {
+            color: var(--primary-color);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: var(--border-radius);
+            border: 1px solid #4b5563; /* Gray-600 */
+            background-color: #374151; /* Gray-700 */
+            color: var(--text-light);
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(244, 114, 182, 0.5);
+        }
+
+        .form-message {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            display: none; /* Hidden by default */
+        }
+
+        .form-message.success {
+            background-color: #10b981; /* Emerald-500 */
+        }
+
+        .form-message.error {
+            background-color: #ef4444; /* Red-500 */
+        }
+
+        .email-link {
+            color: var(--primary-color); /* Pink link */
+            font-size: 1.25rem;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 20px;
+            display: block;
+        }
+
+        .email-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--background-dark);
+            color: #d1d5db; /* Gray-300 */
+            padding: 20px 0;
+            font-size: 0.9rem;
+            border-top: 1px solid #374151;
+        }
+
+        /* --- MODAL STYLES (Updated for better chart display) --- */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
+            backdrop-filter: blur(5px);
+            padding: 20px;
+        }
+
+        .modal.visible {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            /* Increased size for better display of the flow chart */
+            position: relative;
+            margin: auto;
+            width: 90%; 
+            max-width: 1100px; /* Increased max width for desktop */
+            height: 90vh; /* Use viewport height for better sizing */
+            background: var(--text-light);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #modal-body {
+            /* Now acting as the canvas for the background image */
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-size: contain; /* Scale image down to fit */
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 8px;
+        }
+
+        /* Removed .modal-content img styles as we are using background image now */
+
+        .modal-close {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            color: var(--text-light);
+            background-color: var(--primary-color);
+            font-size: 24px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            line-height: 40px;
+            text-align: center;
+            opacity: 0.9;
+            transition: opacity var(--transition-speed), background-color var(--transition-speed);
+            z-index: 10; /* Ensure close button is above the image */
+        }
+
+        .modal-close:hover, .modal-close:focus {
+            opacity: 1;
+            background-color: var(--secondary-color);
+        }
+
+        /* --- MOBILE STYLES (Max 768px) --- */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 12px 16px;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 60px; 
+                left: 0;
+                background-color: var(--background-dark);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                padding: 16px 0;
+            }
+
+            .nav-menu.open {
+                display: flex;
+            }
+
+            .nav-menu li {
+                margin: 0;
+                border-bottom: 1px solid #374151;
+            }
+
+            .nav-menu a {
+                display: block;
+                padding: 12px 16px;
+                text-align: center;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            /* Adjust section padding for mobile */
+            section {
+                padding: 60px 0;
+            }
+
+            /* Home Section Mobile Adjustment: Stacks Image above text and centers everything */
+            #home .home-grid {
+                grid-template-columns: 1fr; /* Stack columns */
+                text-align: center;
+                gap: 30px;
+            }
+            
+            .hero-image-container {
+                order: -1; /* Ensure the image stays at the top/first for mobile */
+                margin-bottom: 0;
+            }
+            
+            .hero-image-container img {
+                max-width: 180px; /* Adjust size for mobile */
+            }
+            
+            .hero-content {
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            /* About Me Section Mobile Adjustment */
+            /* about-content is already centered */
+            .skills-list {
+                justify-content: center;
+            }
+
+            /* Project Section */
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header and Navigation (Persistent Navigation Bar) --><header class="header">
+        <div class="container">
+            <nav class="navbar" role="navigation" aria-label="Main Navigation">
+                <div class="logo">
+                    <!-- Name changed to Alia Sofea --><a href="#home">ALIA SOFEA</a>
+                </div>
+                <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+                    &#9776; <!-- Hamburger Icon --></button>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about-me">About Me</a></li>
+                    <!-- Updated navigation link text: Case Studies -> Projects -->
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 1. Home Section (Updated to two-column layout with image first) --><section id="home">
+        <div class="container home-grid"> <!-- Changed class from hero-content to home-grid -->
+            
+            <!-- Designer Image Container (First/Left) -->
+            <div class="hero-image-container">
+                <!-- IMPORTANT: Changed to relative file path for GitHub Pages -->
+                <img src="./images/alia_profile.jpg" 
+                     alt="A professional and friendly portrait of Alia Sofea, UI/UX Designer." 
+                     loading="lazy"
+                     onerror="this.onerror=null; this.src='https://placehold.co/200x200/8b5cf6/ffffff?text=AS'">
+            </div>
+
+            <!-- Text Content (Second/Right) -->
+            <div class="hero-content">
+                <p>Hello! I'm Alia Sofea,</p>
+                <!-- Title remains UI/UX Designer -->
+                <h1>Creative UI/UX Designer & Prototyping Specialist</h1>
+                <p>I craft intuitive, beautiful, and accessible user experiences that bridge user needs with business goals. My work focuses on empathy-driven design and functional elegance.</p>
+                <a href="#projects" class="btn" style="margin-top: 24px;">View Projects</a>
+                <a href="#contact" class="btn" style="margin-top: 24px; margin-left: 16px; background-color: var(--secondary-color);">Let's Collaborate</a>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- 2. About Me Section (Adjusted to be text-only) --><section id="about-me" style="background-image: linear-gradient(to bottom, #fffbeb, var(--background-light));">
+        <div class="container">
+            <h2>About My Design Journey</h2>
+            
+            <div class="about-content"> 
+                <p>My passion is transforming complex problems into delightful and simple user interfaces. With four years of experience, I specialize in the full design cycle, from initial user research and wireframing to high-fidelity prototyping and usability testing.</p>
+                <p style="margin-top: 15px;">I am committed to designing with a focus on accessibility and human-centered principles, ensuring every interaction feels natural and effortless.</p>
+
+                <h3 style="margin-top: 30px; margin-bottom: 10px;">Design Toolbox</h3>
+                <!-- Skills remain updated for UI/UX --><ul class="skills-list">
+                    <li class="skill-item">Figma & Sketch</li>
+                    <li class="skill-item">User Research</li>
+                    <li class="skill-item">Prototyping (Principle/Framer)</li>
+                    <li class="skill-item">Information Architecture</li>
+                    <li class="skill-item">Visual Design & Branding</li>
+                    <li class="skill-item">Usability Testing</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Projects Section (Section title updated to Projects Section) --><section id="projects" style="background-color: #f3f4f6;">
+        <div class="container">
+            <!-- Updated section heading: Design Case Studies -> Projects Section -->
+            <h2>Projects Section</h2>
+            <div class="project-grid">
+
+                <!-- Project 1 - Mobile App Re-design: Flow & Navigation (Now triggers the image modal) --><div class="project-card">
+                    <!-- Sparkle icon added via CSS ::before --><h3>Mobile App Re-design: Flow & Navigation</h3>
+                    <p>A comprehensive case study detailing the re-architecture of a financial application's information flow to improve user conversion by 18% through simplified navigation.</p>
+                    <!-- Updated link to act as a button and trigger the modal -->
+                    <a href="#" class="project-link open-project-modal" data-project="mobile-redesign">View Project &rarr;</a>
+                </div>
+
+                <!-- Project 2 - Desktop SaaS Platform Mockup: LINK UPDATED --><div class="project-card">
+                    <!-- Sparkle icon added via CSS ::before --><h3>Desktop SaaS Platform Mockup</h3>
+                    <p>High-fidelity mockups and a full style guide for a B2B SaaS dashboard, focusing on data visualization clarity and component library creation in Figma.</p>
+                    <!-- Link updated to the Dribbble tag URL -->
+                    <a href="https://dribbble.com/tags/saas-mockup" class="project-link" target="_blank">View Project &rarr;</a>
+                </div>
+
+                <!-- Project 3 - Accessibility Audit & Wireframing: LINK UPDATED --><div class="project-card">
+                    <!-- Sparkle icon added via CSS ::before --><h3>Accessibility Audit & Wireframing</h3>
+                    <p>Analyzed an existing website for WCAG 2.1 compliance issues and developed low-fidelity wireframes to demonstrate accessible structural improvements and color contrast fixes.</p>
+                    <!-- Link updated to the LinkedIn article URL -->
+                    <a href="https://www.linkedin.com/advice/0/how-do-you-use-wireframing-meet-accessibility-jucaf" class="project-link" target="_blank">View Project &rarr;</a>
+                </div>
+                
+                <!-- Project 4 - Design Focus - MODIFIED TO OPEN MODAL --><div class="project-card">
+                    <!-- Sparkle icon added via CSS ::before --><h3>Branding Identity Project</h3>
+                    <p>Full brand identity creation for a wellness startup, including logo design, typography selection, and creation of a soft, modern color palette.</p>
+                    <!-- ADDED open-project-modal class and data-project attribute -->
+                    <a href="#" class="project-link open-project-modal" data-project="branding-identity">View Project &rarr;</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2>Let's Create Together</h2>
+            <p style="margin-bottom: 40px;">I'm available for freelance projects and full-time opportunities. Drop me a note!</p>
+
+            <!-- FORM MODIFIED: Action attribute added to send data to FormSubmit.co -->
+            <form action="https://formsubmit.co/aliasofea303@gmail.com" method="POST" id="contact-form" class="contact-form">
+                
+                <!-- This hidden field will ensure the customer sees a custom success message -->
+                <input type="hidden" name="_next" value="https://your-github-username.github.io/your-repo-name/thank-you.html">
+
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required aria-required="true">
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <!-- IMPORTANT: The 'email' field is required by FormSubmit for spam checking -->
+                    <input type="email" id="email" name="email" required aria-required="true">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required aria-required="true"></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; background-color: var(--secondary-color);">Send Message</button>
+
+                <!-- Form message element is kept but hidden, as the form now relies on FormSubmit's success page -->
+                <div id="form-message" class="form-message" role="status" aria-live="polite"></div>
+            </form>
+
+            <p style="margin-top: 40px;">You can also reach me directly at:</p>
+            <!-- Email link updated to your email --><a href="mailto:aliasofea303@gmail.com" class="email-link">aliasofea303@gmail.com</a>
+
+        </div>
+    </section>
+
+    <!-- Footer --><footer class="footer">
+        <div class="container" style="text-align: center;">
+            <!-- Name updated in footer --><p>&copy; <span id="current-year"></span> Alia Sofea. All rights reserved. | Designed and coded with pure passion.</p>
+        </div>
+    </footer>
+
+    <!-- Image Modal Overlay -->
+    <div id="image-modal" class="modal" aria-modal="true" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close-btn" aria-label="Close image viewer">&times;</button>
+            <div id="modal-body">
+                <!-- Image will be injected as background CSS here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Pure JavaScript Implementation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // JS Feature 1 & 2: Mobile Menu Toggle & Smooth Scrolling
+
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+            const navLinks = navMenu.querySelectorAll('a');
+
+            // 1. Mobile Menu Toggle
+            hamburger.addEventListener('click', () => {
+                const isExpanded = hamburger.getAttribute('aria-expanded') === 'true' || false;
+                hamburger.setAttribute('aria-expanded', !isExpanded);
+                navMenu.classList.toggle('open');
+            });
+
+            // Close menu when a link is clicked (for smooth scrolling behavior)
+            navLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    // Close the mobile menu after clicking a link
+                    if (navMenu.classList.contains('open')) {
+                        navMenu.classList.remove('open');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+
+
+            // JS Feature 3: Dynamic Copyright Year
+            const yearSpan = document.getElementById('current-year');
+            yearSpan.textContent = new Date().getFullYear();
+
+
+            // ************************************************
+            // MODIFICATION: Form submission JS removed.
+            // The form now uses the 'action' attribute to submit 
+            // data directly to FormSubmit.co. 
+            // The manual client-side handler is no longer needed.
+            // ************************************************
+
+
+            // JS Feature 5: Project Image Modal
+            const modal = document.getElementById('image-modal');
+            const modalBody = document.getElementById('modal-body');
+            const closeBtn = document.getElementById('modal-close-btn');
+            // Select all project links that open a modal
+            const openProjectLinks = document.querySelectorAll('.open-project-modal');
+
+            // --- IMPORTANT: Updated Project Data to use relative file paths for GitHub Pages ---
+            const projectData = {
+                // Project 1: Mobile App Flow
+                'mobile-redesign': {
+                    imageSrc: './images/mobile_flow_design.png',
+                    altText: 'Mobile app flow and navigation design process chart.'
+                },
+                // Project 4: Branding Identity
+                'branding-identity': {
+                    imageSrc: './images/branding_identity.png',
+                    altText: 'Branding Identity project showcasing logo, typography, and color palette.'
+                }
+            };
+
+            // Function to close the modal
+            function closeProjectModal() {
+                modal.classList.remove('visible');
+                modal.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = ''; // Restore scrolling
+                modalBody.style.backgroundImage = ''; // Clear background image on close
+                modalBody.style.backgroundColor = ''; // Clear temporary dark background
+            }
+
+            // Loop through all links to attach the click handler
+            openProjectLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+
+                    const projectId = link.getAttribute('data-project');
+                    const project = projectData[projectId];
+
+                    if (project) {
+                        // Set a dark background to clearly see the placeholder/image
+                        modalBody.style.backgroundColor = 'rgba(0, 0, 0, 0.8)'; 
+
+                        // Set the image as the background of the modal body
+                        modalBody.innerHTML = '';
+                        // Use the new relative path
+                        modalBody.style.backgroundImage = `url('${project.imageSrc}')`;
+                        
+                        // Show the modal
+                        modal.classList.add('visible');
+                        modal.setAttribute('aria-hidden', 'false');
+                        document.body.style.overflow = 'hidden'; // Prevent scrolling background
+                        closeBtn.focus(); // Focus on close button for accessibility
+                    }
+                });
+            });
+
+            // Close when the close button is clicked
+            closeBtn.addEventListener('click', closeProjectModal);
+
+            // Close when clicking outside the modal content (the backdrop)
+            modal.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    closeProjectModal();
+                }
+            });
+
+            // Close when the Escape key is pressed
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && modal.classList.contains('visible')) {
+                    closeProjectModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
